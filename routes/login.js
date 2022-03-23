@@ -2,7 +2,6 @@ const express = require('express')
 const connectDb = require('../middleware/database')
 const Client = require('../models/Client')
 const passport = require('passport')
-const res = require('express/lib/response')
 
 const router = express.Router()
 
