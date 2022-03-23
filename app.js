@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const login = require('./routes/login')
 const register = require('./routes/register')
 const dashboard = require('./routes/dashboard')
+const client = require('./routes/client')
 const Client = require('./models/Client')
 
 const session = require('express-session')
@@ -49,18 +50,17 @@ passport.deserializeUser(Client.deserializeUser())
 app.use("/login", login)
 app.use("/register", register)
 app.use("/dashboard", dashboard)
+app.use("/client", client)
 
 app.get('/logout', function(req, res) {
-    if (req.session.userId) {
-        req.logout()
-        req.session.destroy(err => {
-            if(err){
-                res.send(err);
-            } else {
-                res.redirect('/login')
-            }
-        })
-    }
+    req.logout()
+    req.session.destroy(err => {
+        if(err){
+            res.send(err);
+        } else {
+            res.redirect('/login')
+        }
+    })
 })
 
 app.listen(PORT, () => {

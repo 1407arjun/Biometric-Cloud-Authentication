@@ -14,14 +14,14 @@ router.get("/", connectDb((req, res) => {
 }))
 
 router.post("/", connectDb((req, res) => {
-    client = new Client({name: req.body.name, email: req.body.email})
+    const client = new Client({name: req.body.name, email: req.body.email})
     Client.register(client, req.body.password, (err, user) => {
         if (err) {
             res.send(err)
         } else {
             passport.authenticate("local")(req, res, function() {
                 res.redirect("/dashboard")
-            });
+            })
         }
     })
 }))
